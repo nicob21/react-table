@@ -26,7 +26,12 @@ const Table = (props) => {
       </thead>
       <tbody>
         {props.data.map((item, index) => (
-          <tr key={index}>
+          <tr
+            key={index}
+            style={{
+              backgroundColor: index % 2 === 0 ? "white" : "rgba(0,0,0,0.02)",
+            }}
+          >
             {props.columns.map((col) => (
               <TableCell
                 key={`${col.title}${index}`}

@@ -54,12 +54,11 @@ const UserTable = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        let res = await fetchGet("?results=5", RANDOM_USER_API);
+        let res = await fetchGet("?results=50", RANDOM_USER_API);
         if (get(res, ["results"])) {
           setUsers(get(res, ["results"]));
         }
       } catch (e) {
-        console.log(e);
         setError(e);
       }
     };

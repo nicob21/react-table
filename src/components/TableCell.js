@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./TableCell.css";
 
 import { text, image } from "../constants/data";
 
@@ -8,7 +9,13 @@ const TableCell = (props) => {
 
   return (
     <td>
-      {dataType === image ? <img src={data} alt={data} /> : <span>{data}</span>}
+      <div className="cellContent">
+        {dataType === image ? (
+          <img src={data} alt={data} />
+        ) : (
+          <span>{data}</span>
+        )}
+      </div>
     </td>
   );
 };

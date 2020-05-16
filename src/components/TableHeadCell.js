@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { isEqual } from "lodash";
+import "./TableHeadCell.css";
 
 import bottomArrow from "../assets/images/bottom_arrow_icon.svg";
 
@@ -21,22 +22,25 @@ const TableHeadCell = (props) => {
   };
 
   return (
-    <th onClick={filterColumn}>
-      <span>{title}</span>
-      {isFilterApplied && (
-        <span
-          style={{ backgroundColor: "white", width: "30px", height: "30px" }}
-        >
+    <th className="cell">
+      <div
+        className="cellContent"
+        onClick={filterColumn}
+        style={{ cursor: sortable ? "pointer" : "" }}
+      >
+        <span>{title}</span>
+        {isFilterApplied && (
           <img
             src={bottomArrow}
             alt="arrows"
+            className="sortArrow"
             style={{
               transform:
                 currentSort.order === ORDER_ASC ? "rotate(180deg)" : "",
             }}
           />
-        </span>
-      )}
+        )}
+      </div>
     </th>
   );
 };
