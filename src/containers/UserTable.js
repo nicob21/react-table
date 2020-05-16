@@ -3,6 +3,7 @@ import { get } from "lodash";
 
 import { fetchGet } from "../fetch/fetch";
 
+import LazyLoadContainer from "./LazyLoadContainer";
 import TableContainer from "./TableContainer";
 
 import { RANDOM_USER_API } from "../settings/api";
@@ -52,20 +53,25 @@ const UserTable = () => {
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let res = await fetchGet("?results=50", RANDOM_USER_API);
-        if (get(res, ["results"])) {
-          setUsers(get(res, ["results"]));
-        }
-      } catch (e) {
-        setError(e);
-      }
-    };
     fetchData();
   }, []);
 
-  return <TableContainer columns={columns} data={users} error={error} />;
+  const fetchData = async () => {
+    try {
+      let res = await fetchGet("?results=30", RANDOM_USER_API);
+      if (get(res, ["results"])) {
+        setUsers((prevUsers) => [...prevUsers, ...get(res, ["results"])]);
+      }
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  return (
+    <LazyLoadContainer loadMore={fetchData}>
+      <TableContainer columns={columns} data={users} error={error} />
+    </LazyLoadContainer>
+  );
 };
 
 export default UserTable;
