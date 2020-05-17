@@ -33,7 +33,8 @@ const TableContainer = (props) => {
   const handleColumnResize = (e, ui, colIndex) => {
     if (
       columnsWidth[colIndex] + ui.deltaX >
-      props.columns[colIndex].initialWidth
+      //props.columns[colIndex].initialWidth
+      50
     ) {
       let newColWidth = [...columnsWidth];
       newColWidth[colIndex] += ui.deltaX;

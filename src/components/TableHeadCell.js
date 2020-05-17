@@ -44,12 +44,9 @@ const TableHeadCell = (props) => {
             />
           )}
         </div>
-        {
-          //index < props.columns.length - 2 && (
-          <Draggable axis="x" onDrag={props.handleColumnResize}>
-            <div className="resizeCursor" style={{ left: props.width }} />
-          </Draggable>
-        }
+        <Draggable axis="x" onDrag={props.handleColumnResize}>
+          <div className="resizeCursor" />
+        </Draggable>
       </div>
     </th>
   );

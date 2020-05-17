@@ -5,7 +5,7 @@ import { get } from "lodash";
 import "./Table.css";
 
 import TableHeadCell from "./TableHeadCell";
-import TableCell from "./TableCell";
+import TableCell from "./TableCell/TableCell";
 import { image, text, ORDER_ASC, ORDER_DESC } from "../constants/data";
 
 const Table = (props) => {
