@@ -1,13 +1,10 @@
 import React from "react";
-import Adapter from "enzyme-adapter-react-16";
-import { shallow, configure } from "enzyme";
+import { shallow } from "enzyme";
 
 import { findByTestAttr } from "../../test/testUtils";
 import TableCell from "./TableCell";
 
 import { text, image } from "../../constants/data";
-
-configure({ adapter: new Adapter() });
 
 const setup = ({ data, dataType }) => {
   return shallow(<TableCell data={data} dataType={dataType} />);

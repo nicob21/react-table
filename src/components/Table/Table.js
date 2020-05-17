@@ -4,9 +4,9 @@ import { get } from "lodash";
 
 import "./Table.css";
 
-import TableHeadCell from "./TableHeadCell/TableHeadCell";
-import TableCell from "./TableCell/TableCell";
-import { image, text, ORDER_ASC, ORDER_DESC } from "../constants/data";
+import TableHeadCell from "../TableHeadCell/TableHeadCell";
+import TableCell from "../TableCell/TableCell";
+import { image, text, ORDER_ASC, ORDER_DESC } from "../../constants/data";
 
 const Table = (props) => {
   if (props.error) {

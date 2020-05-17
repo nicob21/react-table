@@ -1,7 +1,7 @@
 import React from "react";
 import { get } from "lodash";
 
-import Table from "../components/Table";
+import Table from "../components/Table/Table";
 
 import { ORDER_ASC } from "../constants/data";
 

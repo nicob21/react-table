@@ -2,11 +2,11 @@ import React from "react";
 
 import "./App.css";
 
-import UserTable from "./containers/UserTable";
+import UserTable from "../../containers/UserTable";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App" data-test="app-component">
       <header className="App-header">
         <UserTable />
       </header>
