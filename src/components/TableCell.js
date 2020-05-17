@@ -8,7 +8,7 @@ const TableCell = (props) => {
   const { data, dataType } = props;
 
   return (
-    <td>
+    <td className="cell">
       <div className="cellContent">
         {dataType === image ? (
           <img src={data} alt={data} />

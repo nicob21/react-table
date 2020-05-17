@@ -15,36 +15,42 @@ const columns = [
     field: ["picture", "thumbnail"],
     sortable: false,
     type: image,
+    initialWidth: 100,
   },
   {
     title: "First Name",
     field: ["name", "first"],
     sortable: true,
     type: text,
+    initialWidth: 120,
   },
   {
     title: "Last Name",
     field: ["name", "last"],
     sortable: true,
     type: text,
+    initialWidth: 120,
   },
   {
     title: "Gender",
     field: ["gender"],
     sortable: true,
     type: text,
+    initialWidth: 120,
   },
   {
     title: "Email",
     field: ["email"],
     sortable: true,
     type: text,
+    initialWidth: 250,
   },
   {
     title: "Cell",
     field: ["cell"],
     sortable: true,
     type: text,
+    initialWidth: 150,
   },
 ];
 

@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { get } from "lodash";
 
+import "./Table.css";
+
 import TableHeadCell from "./TableHeadCell";
 import TableCell from "./TableCell";
+import { image, text, ORDER_ASC, ORDER_DESC } from "../constants/data";
 
 const Table = (props) => {
   if (props.error) {
@@ -11,14 +14,18 @@ const Table = (props) => {
   }
 
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
-          {props.columns.map((col) => (
+          {props.columns.map((col, index) => (
             <TableHeadCell
               key={col.title}
               currentSort={props.currentSort}
               sortData={props.sortData}
+              width={get(props, ["columnsWidth", index])}
+              handleColumnResize={(e, ui) =>
+                props.handleColumnResize(e, ui, index)
+              }
               {...col}
             />
           ))}
@@ -29,7 +36,7 @@ const Table = (props) => {
           <tr
             key={index}
             style={{
-              backgroundColor: index % 2 === 0 ? "white" : "rgba(0,0,0,0.02)",
+              backgroundColor: index % 2 === 0 ? "white" : "rgba(0,0,0,0.01)",
             }}
           >
             {props.columns.map((col) => (
@@ -47,6 +54,16 @@ const Table = (props) => {
 };
 
 Table.propTypes = {
+  columnsWidth: PropTypes.arrayOf(PropTypes.number),
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      field: PropTypes.array,
+      sortable: PropTypes.bool,
+      type: PropTypes.oneOf([image, text]),
+      initialWidth: PropTypes.number,
+    })
+  ),
   data: PropTypes.arrayOf(
     PropTypes.shape({
       login: PropTypes.shape({
@@ -67,7 +84,12 @@ Table.propTypes = {
     })
   ),
   error: PropTypes.string,
+  currentSort: PropTypes.shape({
+    field: PropTypes.array,
+    order: PropTypes.oneOf([ORDER_ASC, ORDER_DESC]),
+  }),
   sortData: PropTypes.func,
+  handleColumnResize: PropTypes.func.isRequired,
 };
 
 export default Table;

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { isEqual } from "lodash";
+import Draggable from "react-draggable";
+
 import "./TableHeadCell.css";
 
 import bottomArrow from "../assets/images/bottom_arrow_icon.svg";
@@ -22,24 +24,32 @@ const TableHeadCell = (props) => {
   };
 
   return (
-    <th className="cell">
-      <div
-        className="cellContent"
-        onClick={filterColumn}
-        style={{ cursor: sortable ? "pointer" : "" }}
-      >
-        <span>{title}</span>
-        {isFilterApplied && (
-          <img
-            src={bottomArrow}
-            alt="arrows"
-            className="sortArrow"
-            style={{
-              transform:
-                currentSort.order === ORDER_ASC ? "rotate(180deg)" : "",
-            }}
-          />
-        )}
+    <th className="headCell" style={{ width: props.width }}>
+      <div className="headCellContent">
+        <div
+          className="headCellTitle"
+          onClick={filterColumn}
+          style={{ cursor: sortable ? "pointer" : "" }}
+        >
+          <span>{title}</span>
+          {isFilterApplied && (
+            <img
+              src={bottomArrow}
+              alt="arrows"
+              className="sortArrow"
+              style={{
+                transform:
+                  currentSort.order === ORDER_ASC ? "rotate(180deg)" : "",
+              }}
+            />
+          )}
+        </div>
+        {
+          //index < props.columns.length - 2 && (
+          <Draggable axis="x" onDrag={props.handleColumnResize}>
+            <div className="resizeCursor" style={{ left: props.width }} />
+          </Draggable>
+        }
       </div>
     </th>
   );
@@ -54,6 +64,7 @@ TableHeadCell.propTypes = {
   sortable: PropTypes.bool,
   field: PropTypes.array,
   sortData: PropTypes.func,
+  width: PropTypes.number,
 };
 
 export default TableHeadCell;
