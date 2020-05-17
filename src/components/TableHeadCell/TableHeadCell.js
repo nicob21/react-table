@@ -1,17 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { isEqual } from "lodash";
+import { get, isEqual } from "lodash";
 import Draggable from "react-draggable";
 
 import "./TableHeadCell.css";
 
-import bottomArrow from "../assets/images/bottom_arrow_icon.svg";
+//import bottomArrow from "../assets/images/bottom_arrow_icon.svg";
+import bottomArrow from "./bottom_arrow_icon.svg";
 
-import { ORDER_ASC, ORDER_DESC } from "../constants/data";
+import { ORDER_ASC, ORDER_DESC } from "../../constants/data";
 
 const TableHeadCell = (props) => {
   const { title, currentSort, sortable, field, sortData } = props;
-  const isFilterApplied = isEqual(field, currentSort.field);
+  const isFilterApplied = isEqual(field, get(currentSort, ["field"]));
 
   const filterColumn = () => {
     if (sortable) {
@@ -24,12 +25,17 @@ const TableHeadCell = (props) => {
   };
 
   return (
-    <th className="headCell" style={{ width: props.width }}>
+    <th
+      className="headCell"
+      style={{ width: props.width }}
+      data-test="table-head-cell-component"
+    >
       <div className="headCellContent">
         <div
           className="headCellTitle"
           onClick={filterColumn}
           style={{ cursor: sortable ? "pointer" : "" }}
+          data-test="table-head-cell-title"
         >
           <span>{title}</span>
           {isFilterApplied && (
@@ -39,8 +45,11 @@ const TableHeadCell = (props) => {
               className="sortArrow"
               style={{
                 transform:
-                  currentSort.order === ORDER_ASC ? "rotate(180deg)" : "",
+                  get(currentSort, ["order"]) === ORDER_ASC
+                    ? "rotate(180deg)"
+                    : "",
               }}
+              data-test="table-head-cell-sort-arrow"
             />
           )}
         </div>
