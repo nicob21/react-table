@@ -1,7 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
+
+/**
+ * Listen to scroll event and run the loadMore function when the bottom
+ * is almost reached and the scroll stopped for a delay
+ */
 
 const LazyLoadContainer = (props) => {
-  const delay = 200;
+  const delay = 500;
   let timeoutSet = false;
 
   React.useLayoutEffect(() => {
@@ -11,7 +17,7 @@ const LazyLoadContainer = (props) => {
         setTimeout(() => {
           if (
             window.innerHeight + window.scrollY >=
-            document.body.offsetHeight
+            document.body.offsetHeight * 0.95
           ) {
             props.loadMore();
           }
@@ -24,6 +30,10 @@ const LazyLoadContainer = (props) => {
   }, []);
 
   return <>{props.children}</>;
+};
+
+LazyLoadContainer.propTypes = {
+  loadMore: PropTypes.func.isRequired,
 };
 
 export default LazyLoadContainer;

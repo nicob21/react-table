@@ -10,15 +10,16 @@ import { image, text, ORDER_ASC, ORDER_DESC } from "../../constants/data";
 
 const Table = (props) => {
   if (props.error) {
-    return <div>{props.error}</div>;
+    return <div data-test="table-error">{props.error}</div>;
   }
 
   return (
-    <table className="table">
+    <table className="table" data-test="table-component">
       <thead>
         <tr>
           {props.columns.map((col, index) => (
             <TableHeadCell
+              data-test="table-column"
               key={col.title}
               currentSort={props.currentSort}
               sortData={props.sortData}
@@ -34,6 +35,7 @@ const Table = (props) => {
       <tbody>
         {props.data.map((item, index) => (
           <tr
+            data-test="table-row"
             key={index}
             style={{
               backgroundColor: index % 2 === 0 ? "white" : "rgba(0,0,0,0.01)",
@@ -64,25 +66,7 @@ Table.propTypes = {
       initialWidth: PropTypes.number,
     })
   ),
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      login: PropTypes.shape({
-        uuid: PropTypes.string,
-      }),
-      gender: PropTypes.string,
-      name: PropTypes.shape({
-        first: PropTypes.string,
-        last: PropTypes.string,
-      }),
-      email: PropTypes.string,
-      cell: PropTypes.string,
-      picture: PropTypes.shape({
-        large: PropTypes.string,
-        medium: PropTypes.string,
-        thumbnail: PropTypes.string,
-      }),
-    })
-  ),
+  data: PropTypes.array,
   error: PropTypes.string,
   currentSort: PropTypes.shape({
     field: PropTypes.array,

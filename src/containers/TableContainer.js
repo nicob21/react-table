@@ -7,10 +7,7 @@ import { ORDER_ASC } from "../constants/data";
 
 const TableContainer = (props) => {
   const [columnsWidth, setColumnWidth] = React.useState([]);
-  const [sort, setSort] = React.useState({
-    field: ["name", "first"],
-    order: ORDER_ASC,
-  });
+  const [sort, setSort] = React.useState({});
 
   // Initialize columns width
   React.useEffect(() => {
@@ -24,7 +21,11 @@ const TableContainer = (props) => {
   }, [props.columns]);
 
   const applySort = (a, b) => {
-    if (get(a, sort.field).toLowerCase() < get(b, sort.field).toLowerCase()) {
+    if (
+      get(a, sort.field) &&
+      get(b, sort.field) &&
+      get(a, sort.field).toLowerCase() < get(b, sort.field).toLowerCase()
+    ) {
       return sort.order === ORDER_ASC ? -1 : 1;
     }
     return sort.order === ORDER_ASC ? 1 : -1;

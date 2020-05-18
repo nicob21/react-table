@@ -9,6 +9,7 @@ import TableContainer from "./TableContainer";
 import { RANDOM_USER_API } from "../settings/api";
 import { image, text } from "../constants/data";
 
+/** Define the columns for the User Table */
 const columns = [
   {
     title: "Picture",
@@ -58,10 +59,12 @@ const UserTable = () => {
   const [users, setUsers] = React.useState([]);
   const [error, setError] = React.useState(null);
 
+  /** Fetch a first chunk of users on mount */
   React.useEffect(() => {
     fetchData();
   }, []);
 
+  /** Fetch data from the random user API */
   const fetchData = async () => {
     try {
       let res = await fetchGet("?results=30", RANDOM_USER_API);
