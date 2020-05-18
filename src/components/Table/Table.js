@@ -43,6 +43,7 @@ const Table = (props) => {
           >
             {props.columns.map((col) => (
               <TableCell
+                data-test="table-cell"
                 key={`${col.title}${index}`}
                 data={get(item, col.field)}
                 dataType={col.type}

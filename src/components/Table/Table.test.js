@@ -5,6 +5,7 @@ import { findByTestAttr } from "../../test/testUtils";
 import Table from "./Table";
 
 import { API_CALL_FAILED } from "../../constants/errors";
+import { text } from "../../constants/data";
 
 const setup = ({
   columnsWidth = [],
@@ -13,7 +14,7 @@ const setup = ({
   error,
   currentSort,
   sortData,
-  handleColumnResize = () => {},
+  handleColumnResize = jest.fn(),
 }) => {
   return shallow(
     <Table
@@ -42,7 +43,7 @@ test("Table renders error correctly", () => {
 });
 
 test("Table renders a 3 columns table", () => {
-  const columns = new Array().fill(3).map((item, index) => ({
+  const columns = new Array(3).fill().map((item, index) => ({
     title: `test${index}`,
   }));
   const wrapper = setup({ columns });
@@ -51,17 +52,21 @@ test("Table renders a 3 columns table", () => {
 });
 
 test("Table renders a 4 columns table with 5 rows", () => {
-  const columns = new Array().fill(4).map((item, index) => ({
+  const columns = new Array(4).fill().map((item, index) => ({
     title: `test${index}`,
     field: [`test${index}`],
+    type: text,
   }));
-  const data = new Array().fill(5).map((item, index) => ({
+  const data = new Array(5).fill().map((item, index) => ({
     test1: "test1",
     test2: "test2",
     test3: "test3",
     test4: "test4",
   }));
   const wrapper = setup({ columns, data });
-  const component = findByTestAttr(wrapper, "table-row");
-  expect(component.length).toBe(data.length);
+  const rows = findByTestAttr(wrapper, "table-row");
+  expect(rows.length).toBe(data.length);
+
+  const cells = findByTestAttr(wrapper, "table-cell");
+  expect(cells.length).toBe(columns.length * data.length);
 });

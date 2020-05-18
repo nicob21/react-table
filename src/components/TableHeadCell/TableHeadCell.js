@@ -53,7 +53,11 @@ const TableHeadCell = (props) => {
             />
           )}
         </div>
-        <Draggable axis="x" onDrag={props.handleColumnResize}>
+        <Draggable
+          axis="x"
+          onDrag={props.handleColumnResize}
+          data-test="table-head-cell-resize-cursor"
+        >
           <div className="resizeCursor" />
         </Draggable>
       </div>
@@ -71,6 +75,7 @@ TableHeadCell.propTypes = {
   field: PropTypes.array,
   sortData: PropTypes.func,
   width: PropTypes.number,
+  handleColumnResize: PropTypes.func,
 };
 
 export default TableHeadCell;

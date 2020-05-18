@@ -8,9 +8,9 @@ import PropTypes from "prop-types";
 
 const LazyLoadContainer = (props) => {
   const delay = 500;
-  let timeoutSet = false;
 
   React.useLayoutEffect(() => {
+    let timeoutSet = false;
     const handleScroll = () => {
       if (!timeoutSet) {
         timeoutSet = true;
@@ -27,6 +27,7 @@ const LazyLoadContainer = (props) => {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line
   }, []);
 
   return <>{props.children}</>;

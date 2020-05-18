@@ -5,17 +5,17 @@ export const fetchGet = async (uri, api = RANDOM_USER_API) => {
   return await fetchRes("GET", uri, api);
 };
 
-export const fetchPost = (uri, body, api = RANDOM_USER_API) => {
-  return fetchRes("POST", uri, api, body);
-};
+// export const fetchPost = (uri, body, api = RANDOM_USER_API) => {
+//   return fetchRes("POST", uri, api, body);
+// };
 
-export const fetchPut = (uri, body, api = RANDOM_USER_API) => {
-  return fetchRes("PUT", uri, api, body);
-};
+// export const fetchPut = (uri, body, api = RANDOM_USER_API) => {
+//   return fetchRes("PUT", uri, api, body);
+// };
 
-export const fetchDelete = (uri, body = {}, api = RANDOM_USER_API) => {
-  return fetchRes("DELETE", uri, api, body);
-};
+// export const fetchDelete = (uri, body = {}, api = RANDOM_USER_API) => {
+//   return fetchRes("DELETE", uri, api, body);
+// };
 
 const fetchRes = async (method, uri, api, body) => {
   try {
@@ -39,7 +39,6 @@ const fetchRes = async (method, uri, api, body) => {
       throw new Error(API_CALL_FAILED);
     }
   } catch (e) {
-    console.log("Fetch", e);
     throw e;
   }
 };

@@ -9,14 +9,12 @@ const TableContainer = (props) => {
   const [columnsWidth, setColumnWidth] = React.useState([]);
   const [sort, setSort] = React.useState({});
 
+  const minColWidth = 50;
+
   // Initialize columns width
   React.useEffect(() => {
     if (props.columns) {
-      let colWidth = [];
-      props.columns.forEach((col) => {
-        colWidth.push(col.initialWidth);
-      });
-      setColumnWidth(colWidth);
+      setColumnWidth(props.columns.map((col) => col.initialWidth));
     }
   }, [props.columns]);
 
@@ -32,11 +30,7 @@ const TableContainer = (props) => {
   };
 
   const handleColumnResize = (e, ui, colIndex) => {
-    if (
-      columnsWidth[colIndex] + ui.deltaX >
-      //props.columns[colIndex].initialWidth
-      50
-    ) {
+    if (columnsWidth[colIndex] + ui.deltaX > minColWidth) {
       let newColWidth = [...columnsWidth];
       newColWidth[colIndex] += ui.deltaX;
       setColumnWidth(newColWidth);
