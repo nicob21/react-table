@@ -1,3 +1,11 @@
+# React Table
+
+This project implements a React table in ReactJS which is then used to display random users' info. The table has the following features:
+
+- Lazy loading of rows on scrolling
+- Sortable columns
+- Resizable columns
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
