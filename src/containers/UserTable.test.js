@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { findByTestAttr } from "../test/testUtils";
 import UserTable from "./UserTable";
 
 test("UserTable renders without error", async () => {
@@ -12,9 +11,4 @@ test("UserTable renders without error", async () => {
 
   const table = wrapper.find("table");
   expect(table.length).toBe(1);
-
-  console.log(component.props(data));
-
-  const rows = findByTestAttr(wrapper, "table-row");
-  expect(rows.length).toBe(30);
 });
