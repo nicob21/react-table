@@ -4,10 +4,6 @@ import { mount } from "enzyme";
 import { findByTestAttr } from "../test/testUtils";
 import UserTable from "./UserTable";
 
-const setup = () => {
-  return mount(<UserTable />);
-};
-
 test("UserTable renders without error", async () => {
   const wrapper = await mount(<UserTable />);
 

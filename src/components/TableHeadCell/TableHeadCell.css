@@ -27,7 +27,7 @@
 }
 
 .resizeCursor {
-  width: 2px;
+  width: 4px;
   height: 40px;
   background-color: red;
   cursor: col-resize;

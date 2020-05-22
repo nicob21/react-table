@@ -5,14 +5,14 @@ import Draggable from "react-draggable";
 
 import "./TableHeadCell.css";
 
-//import bottomArrow from "../assets/images/bottom_arrow_icon.svg";
 import bottomArrow from "./bottom_arrow_icon.svg";
 
 import { ORDER_ASC, ORDER_DESC } from "../../constants/data";
 
 const TableHeadCell = (props) => {
-  const { title, currentSort, sortable, field, sortData } = props;
+  const { title, currentSort, sortable, field, sortData, width } = props;
   const isFilterApplied = isEqual(field, get(currentSort, ["field"]));
+  const nodeRef = React.useRef(null);
 
   const filterColumn = () => {
     if (sortable) {
@@ -27,7 +27,7 @@ const TableHeadCell = (props) => {
   return (
     <th
       className="headCell"
-      style={{ width: props.width }}
+      style={{ width: width }}
       data-test="table-head-cell-component"
     >
       <div className="headCellContent">
@@ -57,8 +57,9 @@ const TableHeadCell = (props) => {
           axis="x"
           onDrag={props.handleColumnResize}
           data-test="table-head-cell-resize-cursor"
+          nodeRef={nodeRef}
         >
-          <div className="resizeCursor" />
+          <div ref={nodeRef} className="resizeCursor" />
         </Draggable>
       </div>
     </th>
